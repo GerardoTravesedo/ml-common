@@ -71,5 +71,3 @@ def generate_image_with_bboxes(
         draw_bbox(bbox, gt_bbox_color)
 
     cv2.imwrite(output_folder + image_name, image)
-
-

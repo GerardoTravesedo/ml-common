@@ -32,7 +32,7 @@ class LearningRateManager:
             self.previous_errors = self.previous_errors[-self.number_steps:]
             # Calculating standard deviation from last N errors added to the list
             std = np.std(self.previous_errors)
-            #print str(std)
+            # print(str(std))
 
             # If standard deviation of errors is very little, error has plateau and we
             # decrease learning rate
@@ -40,12 +40,11 @@ class LearningRateManager:
             # slowly
             if std <= self.threshold and self.learning_rate > 0.00001:
                 new_learning_rate = self.learning_rate / 10
-                print "Reducing learning rate from " + \
-                      str(self.learning_rate) + " to " + str(new_learning_rate)
+                print("Reducing learning rate from {} to {}".format(str(self.learning_rate),
+                                                                    str(new_learning_rate)))
                 self.learning_rate = new_learning_rate
                 # Once we reduce the learning rate we clean the previous errors, to start from
                 # scratch with the new rate
                 self.previous_errors = []
 
-        #print str(self.previous_errors)
-
+        # print(str(self.previous_errors))
