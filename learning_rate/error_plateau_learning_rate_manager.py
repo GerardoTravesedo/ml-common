@@ -1,7 +1,8 @@
+from learning_rate.learning_rate_manager import LearningRateManager
 import numpy as np
 
 
-class LearningRateManager:
+class ErrorPlateauLearningRateManager(LearningRateManager):
 
     def __init__(self, initial_rate, threshold, number_steps):
         """
@@ -17,10 +18,14 @@ class LearningRateManager:
             standard deviation to determine if the errors values are too close and there is a
             plateau
         """
+        super().__init__()
         self.learning_rate = initial_rate
         self.threshold = threshold
         self.number_steps = number_steps
         self.previous_errors = []
+
+    def get_learning_rate(self):
+        return self.learning_rate
 
     def add_error(self, error):
         # Concatenating new error to list of errors
