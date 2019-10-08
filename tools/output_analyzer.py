@@ -24,8 +24,8 @@ def write_predictions_to_file(output_file, labels, predictions):
 
 
 def write_image_detection_predictions_to_file(
-    output_file_for_data, output_dir_for_images, image, image_name, gt_boxes, gt_classes,
-    predicted_boxes, predicted_classes):
+        output_file_for_data, output_dir_for_images, image, image_name, gt_boxes, gt_classes,
+        predicted_boxes, predicted_classes):
     """
     Writes the predictions for object localization and classification to files.
 
@@ -33,7 +33,8 @@ def write_image_detection_predictions_to_file(
     :param output_dir_for_images:
     :param image:
     :param image_name:
-    :param gt_objects:
+    :param gt_boxes:
+    :param gt_classes:
     :param predicted_boxes:
     :param predicted_classes:
     """
@@ -44,7 +45,7 @@ def write_image_detection_predictions_to_file(
     gt_objects = [{"bbox": gt_bbox, "class": gt_class}
                   for gt_bbox, gt_class in zip(gt_boxes, gt_classes)]
 
-    result = {"gt_objects": gt_objects, "predicted_object": predicted_objects}
+    result = {"image_name": image_name, "gt_objects": gt_objects, "predicted_object": predicted_objects}
 
     # Writing all ground truth and predicted data to file so it can be analyzed further
     with open(output_file_for_data, 'a') as output_file:
@@ -52,7 +53,7 @@ def write_image_detection_predictions_to_file(
 
     # Generating images with ground truth and predicted boxes
     image_tools.generate_image_with_bboxes(
-        image, image_name, predicted_boxes, gt_boxes, output_dir_for_images, roi_format=False)
+        image, image_name, predicted_objects, gt_objects, output_dir_for_images, roi_format=False)
 
 
 def write_error_to_file(output_file, iteration, error):
